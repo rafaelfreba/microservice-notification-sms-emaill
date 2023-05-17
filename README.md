@@ -1,2 +1,3 @@
-# microservice-notification-sms-emaill
-Projeto inerente à criação de micro serviço visando o envio de notificações através de sms ou e-mail
+# MICRO SERVICE FOR SENDING NOTIFICATIONS BY SMS OR EMAIL
+
+Project inherent to the creation of a micro service aimed at sending notifications via sms or email.
