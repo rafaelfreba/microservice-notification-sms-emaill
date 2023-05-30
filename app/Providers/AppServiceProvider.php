@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Services\SMS\Providers\OtimaProvider;
+use App\Services\SMS\Providers\ExampleProvider;
 use App\Services\SMS\SmsServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
             $password = config('services.sms.password');
             $url = config('services.sms.url');
 
-            return new OtimaProvider($user, $password, $url);
+            return new ExampleProvider($user, $password, $url);
         });
     }
 
