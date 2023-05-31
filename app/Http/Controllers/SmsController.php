@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SmsRequest;
-use App\Services\SMS\SmsServiceInterface;
+use App\Jobs\SmsJob;
 
 class SmsController extends Controller
 {
-    public function send(SmsRequest $request, SmsServiceInterface $smsService)
+    public function send(SmsRequest $request)
     {
-        $response = $smsService->send(
-            $request->safe()->cellNumber,
-            $request->safe()->message
-        );
+        $data = [
+            'cellNumber' => $request->safe()->cellNumber,
+            'message' => $request->safe()->message
+        ];
 
-        return $response == 200 ? response('success', $response) : response('error', $response);
+        SmsJob::dispatch($data)->delay(now()->addSeconds(5));
+        
     }
 }
