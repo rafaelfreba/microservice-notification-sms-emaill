@@ -1,8 +1,8 @@
-# MICRO SERVICE FOR SENDING NOTIFICATIONS BY SMS OR EMAIL
+# MICRO SERVICE FOR SENDING NOTIFICATIONS BY SHORT MESSAGE SERVICE (SMS) OR E-MAIL
 
-Project inherent to the creation of a micro service aimed at sending notifications via sms or email.
+Project inherent to the creation of a micro service aimed at sending notifications via short message service (sms) or e-mail.
 
-### How to use:
+### How to use SMS:
 
 > 1) In app\Services\SMS\Providers edit the send method of ExampleProvider.php class;
 ```php
@@ -27,14 +27,48 @@ SMS_API_USER=
 SMS_API_PASSWORD=
 SMS_API_URL=
 ```
-> 5) To run the project you can use the command:
-```
-php artisan serve
-```
-> 6) For your application to send a message, just make a http post request passing json with the cell phone number and the message, example:
+> 5) For your application to send a message, just make a http post request passing json with the cell phone number and the message, example:
 ```json
 {
   "cellNumber":"XXXXXXXXXXX",
   "message" : "TEST!!!"
 }
 ```
+### How to use E-MAIL:
+
+> 1) Enter SERVER SMTP credentials in .env file:
+```php
+# SERVER SMTP CREDENCIALS
+MAIL_MAILER=
+MAIL_HOST=
+MAIL_PORT=
+MAIL_USERNAME=
+MAIL_PASSWORD=
+MAIL_ENCRYPTION=
+```
+> 2) For your application to send a e-mail, just make a http post request passing json, example:
+```json
+{
+  "subject" : "Welcome!",
+  "name" : "John Doe",
+  "email" : "johndoe@test.com",
+  "message" : "Welcome to the e-mail notification microservice!!!"
+}
+```
+> 3) Customize the email template in resources\views\email.blade.php, the data can be accessed according to the example:
+```blade
+{{ $data['main']['subject'] }}
+{{ $data['main']['name'] }}
+{{ $data['main']['email'] }}
+{{ $data['main']['message'] }}
+```
+
+### For to test the project type the commands in different terminals:
+```php
+php artisan serve
+```
+
+```php
+php artisan queue:work
+```
+
